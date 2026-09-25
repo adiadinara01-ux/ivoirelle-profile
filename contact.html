@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contact - Ivoirelle</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            <span>Ivoirelle's Profile</span>
+            <span class="sparkle">୨୧</span>
+        </div>
+
+        <div class="nav-menu">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </div>
+
+    </nav>
+
+
+    <!-- ================= CONTACT ================= -->
+
+    <main>
+
+        <section class="contact-section">
+
+            <h1>Contact Me ♡</h1>
+
+            <form
+                class="contact-form"
+                id="contact-form"
+                action="https://formspree.io/f/xbglaapv"
+                method="POST"
+            >
+
+                <!-- Nama -->
+
+                <label for="nama">Name</label>
+
+                <input
+                    type="text"
+                    id="nama"
+                    name="name"
+                    placeholder="Your name, sweetheart ♡"
+                    required
+                >
+
+
+                <!-- Email -->
+
+                <label for="email">Email</label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Your email, sweetheart ♡"
+                    required
+                >
+
+
+                <!-- Pesan -->
+
+                <label for="pesan">Message</label>
+
+                <textarea
+                    id="pesan"
+                    name="message"
+                    rows="6"
+                    placeholder="Leave your little note here ><"
+                    required
+                ></textarea>
+
+
+                <!-- Tombol -->
+
+                <button type="submit">
+                    Send Message
+                </button>
+
+                <!-- Pesan berhasil -->
+
+                <p id="success-message"></p>
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+        Made with ♡ by Ivoirelle
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        const form = document.getElementById("contact-form");
+        const successMessage = document.getElementById("success-message");
+
+        form.addEventListener("submit", async function(event) {
+
+            event.preventDefault();
+
+            const button = form.querySelector("button");
+
+            button.disabled = true;
+            button.textContent = "Sending... ♡";
+
+            const formData = new FormData(form);
+
+            try {
+
+                const response = await fetch(form.action, {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        "Accept": "application/json"
+                    }
+                });
+
+                if (response.ok) {
+
+                    form.reset();
+
+                    successMessage.textContent =
+                        "Your message has been sent successfully";
+
+                    button.disabled = false;
+                    button.textContent = "Send Message";
+
+                } else {
+
+                    successMessage.textContent =
+                        "Oops! Something went wrong. Please try again ♡";
+
+                    button.disabled = false;
+                    button.textContent = "Send Message";
+                }
+
+            } catch (error) {
+
+                successMessage.textContent =
+                    "Oops! Something went wrong. Please try again ♡";
+
+                button.disabled = false;
+                button.textContent = "Send Message";
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>
